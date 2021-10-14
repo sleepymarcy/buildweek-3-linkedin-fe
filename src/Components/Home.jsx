@@ -1,12 +1,8 @@
 import { Row, Container, Col } from "react-bootstrap";
-import LinkedinNavbar from "./Navbar";
 import Aside from "./Aside";
-import Footer from "./Footer";
-import SideFooter from "./SideFooter";
 import MainContainer from "./MainContainer";
 import About from "./About";
 import Dashboard from "./Dashboard";
-import Activity from "./Activity";
 import Experience from "./Experience";
 import ProfileHomePost from "./ProfileHomePost"
 
