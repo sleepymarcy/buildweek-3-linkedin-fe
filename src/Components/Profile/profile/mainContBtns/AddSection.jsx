@@ -1,7 +1,5 @@
 import React from "react";
 import "./contBtns.css";
-import { Dropdown, Butoon, DropdownButton } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { useState } from "react";
 import { AiOutlineCheck } from "react-icons/ai";

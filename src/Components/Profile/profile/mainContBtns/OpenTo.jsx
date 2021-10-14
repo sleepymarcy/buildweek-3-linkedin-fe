@@ -1,6 +1,5 @@
 import React from "react";
 import "./contBtns.css";
-import { Dropdown, Butoon, DropdownButton } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function OpenTo({ personAcc }) {

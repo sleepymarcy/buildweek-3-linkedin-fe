@@ -1,11 +1,12 @@
-import { Card } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import { Link, withRouter } from "react-router-dom";
+import "./profile/mainContBtns/contBtns.css";
 
 const ViewedPeople = ({ message, data }) => {
   const num = [1, 2, 3, 4, 5];
   const startingIndex = message === "Message" ? 0 : 6;
   const endingIndex = message === "Message" ? 5 : 11;
- 
+
   const listgenerate = () => {
     return (
       <li className="d-flex mt-3">
@@ -42,7 +43,12 @@ const ViewedPeople = ({ message, data }) => {
                   {person.title}
                 </Card.Subtitle>
                 <div className="text-left p-0 mt-1">
-                  <button>{message}</button>
+                  <Button
+                    className="font-weight-bold position-relative"
+                    variant="outline-secondary"
+                  >
+                    {message}
+                  </Button>
                 </div>
               </div>
             </Link>
