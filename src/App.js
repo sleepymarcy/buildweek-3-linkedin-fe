@@ -4,14 +4,15 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Feed from "./Components/Feed/Feed.jsx";
 import Home from "./Components/Profile/Home";
 import Footer from "./Components/Footer/Footer";
-import MyNav from "./Components/navbar/MyNav"
-
+import MyNav from "./Components/navbar/MyNav";
 
 function App() {
   return (
     <>
       <Router>
         <MyNav />
+        <br />
+        <br />
         <Switch>
           <Route path="/home" exact component={Home} />
           <Route path="/home/:id" component={Home} />
