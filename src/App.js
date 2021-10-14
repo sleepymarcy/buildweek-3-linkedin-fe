@@ -5,6 +5,7 @@ import Feed from "./Components/Feed/Feed.jsx";
 import Home from "./Components/Profile/Home";
 import Footer from "./Components/Footer/Footer";
 import MyNav from "./Components/navbar/MyNav";
+import Connection from "./Components/Profile/connection/Connection";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/home/:id" component={Home} />
           <Route path="/" exact component={Feed} />
           <Route path="/feed" exact component={Feed} />
+          <Route path="/connections" exact component={Connection} />
           <Route
             render={() => (
               <>

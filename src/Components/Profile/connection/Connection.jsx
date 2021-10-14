@@ -1,11 +1,12 @@
 import React from "react";
 import { Button, Col, Container, Row, Dropdown, Form } from "react-bootstrap";
 import { BiCaretDown } from "react-icons/bi";
+import ConnPerson from "./ConnPerson";
 import "./style.css";
 
 export default function Connection() {
   return (
-    <>
+    <div className="h-100">
       <div className="w-100 connectCont">
         <Container>
           <Row>
@@ -45,21 +46,36 @@ export default function Connection() {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <div className="checkBoxs">
-                  <div className="d-flex checkbox">
-                    <input type="checkbox" id="1st" name="1st"></input>
-                    <span>1st</span>
+                <div>
+                  <div className="checkBoxs">
+                    <div className="d-flex checkbox">
+                      <input type="checkbox" id="1st" name="1st"></input>
+                      <span>1st</span>
+                    </div>
+                    <div className="d-flex checkbox">
+                      <input type="checkbox" id="1st" name="1st"></input>
+                      <span>2nd</span>
+                    </div>
+                    <div className="d-flex checkbox">
+                      <input type="checkbox" id="1st" name="1st"></input>
+                      <span>3rd+</span>
+                    </div>
+                    <div className="buttonss"></div>
+                  </div>{" "}
+                  <div className="d-flex justify-content-end">
+                    <button className="ressetBtn text-muted font-weight-bold">
+                      Reset
+                    </button>
+                    <Button
+                      variant="primary"
+                      style={{ backgroundColor: "#0A66C2", color: "white" }}
+                      className="connBtns my-auto font-weight-bold"
+                      size="sm"
+                    >
+                      <h6 className="font-weight-bold m-0">Show result</h6>
+                    </Button>
                   </div>
-                  <div className="d-flex checkbox">
-                    <input type="checkbox" id="1st" name="1st"></input>
-                    <span>2nd</span>
-                  </div>
-                  <div className="d-flex checkbox">
-                    <input type="checkbox" id="1st" name="1st"></input>
-                    <span>3rd+</span>
-                  </div>
-                  <div className="buttonss"></div>
-                </div>{" "}
+                </div>
               </Dropdown.Menu>
             </Dropdown>
             {/*  */}
@@ -111,11 +127,16 @@ export default function Connection() {
             >
               <h6 className="font-weight-bold m-0">All filters</h6>
             </Button>
-            <div>1</div>
-            <div>1</div>
+            <button className="ressetBtn text-muted font-weight-bold">
+              Reset
+            </button>
           </Row>
         </Container>
       </div>
-    </>
+      <br />
+      <Container>
+        <ConnPerson />
+      </Container>
+    </div>
   );
 }

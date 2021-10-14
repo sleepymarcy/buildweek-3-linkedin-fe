@@ -151,6 +151,9 @@ const MainContainer = ({ match }) => {
                         <a href="">Contact info</a>
                       </small>{" "}
                     </div>
+                    <small className="ml-1 contact-info font-weight-bold">
+                      <Link to="/connections">Connections</Link>
+                    </small>{" "}
                   </>
                 ) : (
                   <>
