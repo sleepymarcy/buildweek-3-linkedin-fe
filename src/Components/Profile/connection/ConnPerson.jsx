@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 
 export default function ConnPerson() {
   const [Loading, setLoading] = useState(true);
+  const [LoadReq, setLoadReq] = useState(true);
   const [Friends, setFriends] = useState([]);
   const [Request, setRequest] = useState([]);
   //
   const fetchFriends = async (id) => {
-    const url = `${process.env.REACT_APP_FETCHLINK}/profile/${1}/friends`;
+    const url = `${process.env.REACT_APP_FETCHLINK}/profile/1/friends`;
     try {
       const response = await fetch(url);
       if (response.ok) {
@@ -22,13 +23,13 @@ export default function ConnPerson() {
   };
   //
   const fetchRequests = async (id) => {
-    const url = `${process.env.REACT_APP_FETCHLINK}/profile/${1}/friendRequest`;
+    const url = `${process.env.REACT_APP_FETCHLINK}/profile/1/friendRequest`;
     try {
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
-        setRequest(data);
-        console.log(data);
+        await setRequest(data);
+        setLoadReq(false);
       }
     } catch (error) {
       console.log(error);
@@ -42,23 +43,23 @@ export default function ConnPerson() {
   return (
     <>
       <Row>
-        {!Loading && (
-          <Col xs="9">
-            <p className="text-muted"> {Friends.total} result</p>
+        <Col xs="9">
+          {!LoadReq && (
             <div className="d-flex mainConnPersCont flex-column">
-              {Friends.friends.map((fr) => (
-                <Row key={fr} className="p-3 pl-4">
+              {" "}
+              {Request.friendRequests.map((fr) => (
+                <Row key={fr} className="p-3">
                   <Col
                     xs="12"
-                    md="1"
-                    className="d-flex justify-content-center align-items-center p-0"
+                    md="2"
+                    className="d-flex justify-content-center align-items-center p-1"
                   >
                     <img src={fr.image} alt="" className="image-person" />
                   </Col>
                   <Col
                     className="border-bot d-flex flex-column p-0 py-2"
                     xs="12"
-                    md="9"
+                    md="7"
                   >
                     <h5 className="m-0 font-weight-bold">
                       {fr.name} {fr.surname}
@@ -69,7 +70,7 @@ export default function ConnPerson() {
                   </Col>
                   <Col
                     xs="12"
-                    md="2"
+                    md="3"
                     className=" border-bot d-flex justify-content-center align-items-center p-4"
                   >
                     <Button
@@ -83,13 +84,58 @@ export default function ConnPerson() {
                 </Row>
               ))}
             </div>
-          </Col>
-        )}
+          )}
+          {!Loading && (
+            <>
+              <p className="text-muted"> {Friends.total} result</p>
+              <div className="d-flex mainConnPersCont flex-column">
+                {Friends.friends.map((fr) => (
+                  <Row key={fr} className="p-3">
+                    <Col
+                      xs="12"
+                      md="2"
+                      className="d-flex justify-content-center align-items-center p-1"
+                    >
+                      <img src={fr.image} alt="" className="image-person" />
+                    </Col>
+                    <Col
+                      className="border-bot d-flex flex-column p-0 py-2"
+                      xs="12"
+                      md="7"
+                    >
+                      <h5 className="m-0 font-weight-bold">
+                        {fr.name} {fr.surname}
+                      </h5>
+                      <p className="m-0">{fr.title}</p>
+                      <p className="m-0 text-muted">{fr.area}</p>
+                      <p className="m-0">{fr.bio}</p>
+                    </Col>
+                    <Col
+                      xs="12"
+                      md="3"
+                      className=" border-bot d-flex justify-content-center align-items-center p-4"
+                    >
+                      <Button
+                        variant="outline-primary"
+                        className="connBtns my-auto font-weight-bold"
+                        size="sm"
+                      >
+                        <h6 className="font-weight-bold m-0">Message</h6>
+                      </Button>{" "}
+                    </Col>
+                  </Row>
+                ))}
+              </div>
+            </>
+          )}
+        </Col>
         <Col xs="3">
-          <div>
-            {" "}
-            <p></p>
-            <p>asd</p>
+          <br />
+          <div className="mainConnPersCont mt-3">
+            <img
+              src="https://xyzscripts.com/data/clone/popads-clone-script-og.png"
+              alt=""
+            />
           </div>
         </Col>
       </Row>
