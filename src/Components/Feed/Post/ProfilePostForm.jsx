@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import  "../css/AllProfilePosts.css"
+import "../../../css/AllProfilePosts.css";
 import { MdInsertPhoto } from "react-icons/md"
 import { BiCalendar } from "react-icons/bi"
 import { ImPlay } from "react-icons/im"

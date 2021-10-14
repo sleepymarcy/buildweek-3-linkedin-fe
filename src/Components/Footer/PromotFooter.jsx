@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/FeedRBar.css";
+import "../../css/FeedRBar.css";
 import { Link } from "react-router-dom";
 import { BsThreeDots } from "react-icons/bs";
 import { MdKeyboardArrowRight } from "react-icons/md";

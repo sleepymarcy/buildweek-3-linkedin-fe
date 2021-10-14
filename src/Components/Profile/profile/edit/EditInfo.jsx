@@ -15,7 +15,7 @@ import { AiFillEye } from "react-icons/ai";
 import { useRef } from "react";
 import { RiArrowLeftLine } from "react-icons/ri";
 
-import "../css/editModal.css";
+import "../../../../css/editModal.css";
 import EditSecondModal from "./EditSecondModal";
 
 export default function EditInfo({

@@ -1,6 +1,6 @@
 import { Row, Col, Card, Button } from "react-bootstrap";
 import { BsThreeDots } from "react-icons/bs";
-import Learning from "./Learning";
+import Learning from "../Learning";
 import ViewedPeople from "./ViewedPeople";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { useState, useEffect } from "react";

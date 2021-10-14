@@ -1,4 +1,4 @@
-import "../css/FeedRBar.css";
+import "../../css/FeedRBar.css";
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";

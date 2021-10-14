@@ -1,4 +1,4 @@
-import "../css/FeedLeftBar.css";
+import "../../css/FeedLeftBar.css";
 import React from "react";
 import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";

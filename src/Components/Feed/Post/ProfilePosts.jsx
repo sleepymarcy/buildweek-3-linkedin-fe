@@ -6,7 +6,7 @@ import { FcLike } from "react-icons/fc"
 import { RiSendPlaneFill } from "react-icons/ri"
 import { FaRegCommentDots, FaShare } from "react-icons/fa"
 import { format, parseISO } from "date-fns"
-import "../css/AllProfilePosts.css"
+import "../../../css/AllProfilePosts.css";
 
 const Posts = ({postProps}) => {
   return (

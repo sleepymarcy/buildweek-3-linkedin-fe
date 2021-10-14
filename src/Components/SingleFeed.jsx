@@ -8,7 +8,7 @@ import {
   RiSendPlaneFill,
 } from "react-icons/ri";
 import formatDistance from "date-fns/formatDistance";
-import ModalItem from "./Modal";
+import ModalItem from "./Feed/Post/Modal";
 import { useState } from "react";
 
 const SingleFeed = ({

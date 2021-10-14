@@ -1,10 +1,10 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Feed from "./Components/Feed";
-import Home from "./Components/Home";
-import Footer from "./Components/Footer";
-import MyNav from "./Components/MyNav.jsx"
+import Feed from "./Components/Feed/Feed.jsx";
+import Home from "./Components/Profile/Home";
+import Footer from "./Components/Footer/Footer";
+import MyNav from "./Components/navbar/MyNav"
 
 
 function App() {

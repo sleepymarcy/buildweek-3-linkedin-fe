@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
-import "../css/activity.css"
-import "../css/about.css"
+import "../../../css/activity.css"
+import "../../../css/about.css"
  class Activity extends Component {
   render() {
     return (

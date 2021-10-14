@@ -3,7 +3,7 @@ import { Modal, Button, Row, Col, Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useRef } from "react";
 import { AiFillEye } from "react-icons/ai";
-import "../css/editModal.css";
+import "../../../css/editModal.css";
 
 
 import { DropdownDate, DropdownComponent } from "react-dropdown-date";

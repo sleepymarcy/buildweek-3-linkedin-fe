@@ -1,10 +1,10 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import SingleFeed from "./SingleFeed";
+import SingleFeed from "./../SingleFeed";
 import { useState, useEffect } from "react";
-import PostFeed from "./Post";
-import FeedLeftBar from "./FeedLeftBar";
-import FeedRightBar from "./FeedRightBar";
+import PostFeed from "../Post";
+import FeedLeftBar from "./FeedLeftBar.jsx";
+import FeedRightBar from "./FeedRightBar.jsx";
 
 function Feed() {
   const [posts, setPosts] = useState([]);

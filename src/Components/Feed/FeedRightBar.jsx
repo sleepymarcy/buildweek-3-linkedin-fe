@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/FeedRBar.css";
+import "../../css/FeedRBar.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { GoPrimitiveDot } from "react-icons/go";
@@ -7,7 +7,7 @@ import { BsFillInfoSquareFill } from "react-icons/bs";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { GrClose } from "react-icons/gr";
 import FeedRightBar2 from "./FeedRightBar2";
-import PromotFooter from "./PromotFooter";
+import PromotFooter from "../Footer/PromotFooter";
 
 export default function FeedRightBar() {
   const [ShowMore, setShowMore] = useState(false);

@@ -1,14 +1,13 @@
-import { useState, useEffect, React } from "react";
-import { Modal, Button, FormControl } from "react-bootstrap";
-import Privacy from "./Privacy";
+import { useState, React } from "react";
+import { Modal, Button } from "react-bootstrap";
+import Privacy from "../../Privacy";
 import TextareaAutosize from "react-textarea-autosize";
-import { BsCardImage, BsThreeDots, BsFillBriefcaseFill } from "react-icons/bs";
+import { BsThreeDots, BsFillBriefcaseFill } from "react-icons/bs";
 import { AiFillPlaySquare, AiFillEdit } from "react-icons/ai";
 import { ImStatsBars } from "react-icons/im";
 import { GiFlowerStar } from "react-icons/gi";
 import { HiDocumentText } from "react-icons/hi";
-import ImageForPost from "./ImageForPost";
-import EditBgImg from "./EditBgImg";
+import EditBgImg from "../../Profile/profile/edit/EditBgImg";
 
 const ModalItem = ({
   onNewPost,

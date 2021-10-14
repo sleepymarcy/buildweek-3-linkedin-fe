@@ -2,8 +2,8 @@ import React from "react";
 import { Modal, Button, Row, Col, Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useRef } from "react";
-import "../css/experience.css"
-import "../css/editModal.css";
+import "../../../../css/experience.css"
+import "../../../../css/editModal.css";
 
 
 import { DropdownDate, DropdownComponent } from "react-dropdown-date";

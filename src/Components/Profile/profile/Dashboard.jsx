@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../css/dashboard.css";
+import "../../../css/dashboard.css";
 import { Row, Col } from "react-bootstrap";
 import {Link} from 'react-router-dom'
 

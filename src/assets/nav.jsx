@@ -1,6 +1,6 @@
 import { Dropdown, Card, ListGroup, Button } from 'react-bootstrap'
 import '../css/Nav.css'
-import { Wicon } from './icons.jsx'
+import { Wicon } from '../assets/icons.jsx'
 import React from 'react';
 import WorkDrawer from './WorkDrawer.jsx';
 import { GrClose } from 'react-icons/gr'

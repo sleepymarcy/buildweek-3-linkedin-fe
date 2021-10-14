@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { format, parseISO } from "date-fns";
 import { Row, Col } from "react-bootstrap";
-import "../css/experience.css";
+import "../../../css/experience.css";
 import AddExperience from "./AddExperience";
-import EditExperience from "./EditExperience";
+import EditExperience from "./edit/EditExperience";
 
 const Experience = ({match}) => {
   const [userExperience, setExperience] = useState([]);
