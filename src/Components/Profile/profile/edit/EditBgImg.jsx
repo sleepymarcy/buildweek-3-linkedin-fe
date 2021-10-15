@@ -12,11 +12,8 @@ function EditBgImg({
   title,
   postId,
   fetchPosts,
-<<<<<<< HEAD
   profileId,
-=======
   clickOff,
->>>>>>> connections
 }) {
   const localHost = process.env.REACT_APP_LOCALHOST;
 
