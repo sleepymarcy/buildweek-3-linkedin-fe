@@ -6,8 +6,10 @@ import { Link } from "react-router-dom";
 export default function Search() {
   const [Profiles, setProfiles] = useState([]);
   const [ShowSearch, setShowSearch] = useState(false);
+  const [SearchVal, setSearchVal] = useState("");
   //
   const searchFetch = async (search) => {
+    setSearchVal(search);
     setShowSearch(true);
     let url = `${process.env.REACT_APP_FETCHLINK}/profile?search=${search}`;
     try {
@@ -21,18 +23,18 @@ export default function Search() {
       console.log(error);
     }
   };
-
+  const setValue = (val) => {
+    setSearchVal(val);
+    SearchVal.length > 0 ? searchFetch(val) : setShowSearch(false);
+  };
   return (
     <>
       {/* <Form inline as="li"> */}
       <Form.Control
+        value={SearchVal}
         type="text"
         placeholder="... Search"
-        onChange={(e) =>
-          e.target.value.length > 1
-            ? searchFetch(e.target.value)
-            : setShowSearch(false)
-        }
+        onChange={(e) => setValue(e.target.value)}
       />
       {/* </Form> */}
       {ShowSearch && (
@@ -43,6 +45,7 @@ export default function Search() {
               className="my-2 searchCarts px-3"
               onClick={() => {
                 setShowSearch(false);
+                setSearchVal("");
               }}
             >
               <div className="d-flex align-items-center">
