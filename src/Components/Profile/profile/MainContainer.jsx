@@ -59,7 +59,26 @@ const MainContainer = ({ match }) => {
       console.log(erorr);
     }
   };
-
+  //   !
+  const sendConnect = async (myId, personId) => {
+    console.log(myId, personId);
+    try {
+      const url = `${process.env.REACT_APP_FETCHLINK}/profile/${myId}/addFriend`;
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify({ followId: personId }), // CHANGE TO REQ VARIABLE
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   //   JSX
 
   return (
