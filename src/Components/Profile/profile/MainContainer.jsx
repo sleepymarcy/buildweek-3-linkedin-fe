@@ -88,10 +88,10 @@ const MainContainer = ({ match }) => {
   const sendConnect = async (myId, personId) => {
     console.log(myId, personId);
     try {
-      const url = `${process.env.REACT_APP_FETCHLINK}/profile/${myId}/sentFriendRequest`;
+      const url = `${process.env.REACT_APP_FETCHLINK}/profile/${myId}/addFriend`;
       const response = await fetch(url, {
         method: "POST",
-        body: JSON.stringify({ profileId: personId }), // CHANGE TO REQ VARIABLE
+        body: JSON.stringify({ followId: personId }), // CHANGE TO REQ VARIABLE
         headers: {
           "Content-type": "application/json",
         },
@@ -267,7 +267,7 @@ const MainContainer = ({ match }) => {
                     >
                       More
                     </Button>
-                    {BtnsUpdate.more && <More personAcc={match.params.id} />}
+                    {BtnsUpdate.more && <More personAcc={1} />}
                   </div>
                 </div>
               </Col>

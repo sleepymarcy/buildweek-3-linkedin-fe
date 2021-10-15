@@ -4,10 +4,11 @@ import { Dropdown, Butoon, DropdownButton } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { IoReturnUpForwardOutline } from "react-icons/io5";
 import { BsDownload, BsNewspaper } from "react-icons/bs";
+
 export default function More({ personAcc }) {
   return (
     <>
-      {!personAcc && (
+      {personAcc && (
         <div className="dropdownCard d-flex flex-column align-items-center justify-content-between">
           <Link
             to="/"
@@ -18,20 +19,22 @@ export default function More({ personAcc }) {
               Share profile in a message
             </p>
           </Link>
-          <Link
-            to="/"
+          <a
+            href={`${process.env.REACT_APP_FETCHLINK}/profile/${personAcc}/CV`}
             className="d-flex justify-content-between align-items-center linkCard w-100"
           >
             <BsDownload size="1.4rem" />
             <p className="ml-2 font-weight-light m-0">Save to PDF</p>
-          </Link>
-          <Link
-            to="/"
+          </a>
+          <a
+            href={`${process.env.REACT_APP_FETCHLINK}/experience/${personAcc}/CSV`}
             className="d-flex justify-content-between align-items-center linkCard w-100"
           >
             <BsNewspaper size="1.4rem" />
-            <p className="ml-2 font-weight-light m-0">Build a resume</p>
-          </Link>
+            <p className="ml-2 font-weight-light text-right">
+              Download all experience
+            </p>
+          </a>
         </div>
       )}
     </>
