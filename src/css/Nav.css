@@ -1,7 +1,7 @@
 .navbar {
-  padding: 0 !important;
+  /* padding: 0 !important; */
   border-bottom: 1px solid #e0e0e0 !important;
-  max-height: 52px;
+  /* max-height: 52px; */
 }
 
 .navbar-nav {
@@ -20,6 +20,7 @@
   padding-left: 80px;
 }
 
+/* NAVS */
 .nav-search {
   align-items: center;
   display: flex;
@@ -208,6 +209,14 @@ h5 {
 }
 .searchCarts:hover {
   background-color: rgb(182, 182, 182, 0.4);
+  text-decoration: none;
+}
+.selectedNavb {
+  border-radius: 3px;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.582);
+  color: black !important;
+}
+.selectedNavb:hover {
   text-decoration: none;
 }
 ul {

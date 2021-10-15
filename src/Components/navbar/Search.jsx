@@ -8,6 +8,7 @@ export default function Search() {
   const [ShowSearch, setShowSearch] = useState(false);
   //
   const searchFetch = async (search) => {
+    setShowSearch(true);
     let url = `${process.env.REACT_APP_FETCHLINK}/profile?search=${search}`;
     try {
       const response = await fetch(url);
@@ -37,7 +38,13 @@ export default function Search() {
       {ShowSearch && (
         <div className="searchContainer d-flex flex-column">
           {Profiles.map((pr) => (
-            <Link to={`/home/${pr.id}`} className="my-2 searchCarts px-3">
+            <Link
+              to={`/home/${pr.id}`}
+              className="my-2 searchCarts px-3"
+              onClick={() => {
+                setShowSearch(false);
+              }}
+            >
               <div className="d-flex align-items-center">
                 <img
                   src={pr.image}
