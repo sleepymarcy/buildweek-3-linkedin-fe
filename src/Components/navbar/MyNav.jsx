@@ -19,6 +19,7 @@ import { Work, User } from "../../assets/nav.jsx";
 import { LinkContainer } from "react-router-bootstrap";
 import "../../css/Nav.css";
 import { Link } from "react-router-dom";
+import Search from "./Search";
 
 const MyNav = () => {
   return (
@@ -29,16 +30,18 @@ const MyNav = () => {
             <Linked />
           </Link>
 
-          <Form inline as="li">
-            <InputGroup>
+          {/* <InputGroup>
               <InputGroup.Prepend>
                 <InputGroup.Text className="search">
                   <Sicon />
                 </InputGroup.Text>
               </InputGroup.Prepend>
               <FormControl className="search" placeholder="Search" />
-            </InputGroup>
-          </Form>
+            </InputGroup> */}
+          <div className="nav-search">
+            <Sicon />
+            <Search />
+          </div>
 
           <Nav className="nav">
             <LinkContainer to="/home">
