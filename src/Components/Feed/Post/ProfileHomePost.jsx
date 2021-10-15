@@ -6,7 +6,7 @@ import Posts from "./ProfilePosts";
 import { Modal, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../../../css/AllProfilePosts.css";
-import '../../../css/Nav.css'
+import "../../../css/Nav.css";
 import "../../../css/experience.css";
 
 const ProfileHomePost = () => {
@@ -26,7 +26,6 @@ const ProfileHomePost = () => {
       );
       if (response.ok) {
         const myProfile = await response.json();
-        console.log(myProfile);
         setMeProfile(myProfile);
       } else {
         console.log("there was a4n error");
@@ -80,14 +79,12 @@ const ProfileHomePost = () => {
           className="text-left ml-4 mr-4 mt-4 d-flex"
           style={{ height: "40px" }}
         >
-          <p className="mb-0 py-0">
-            <h5 style={{ fontWeight: "480" }}>Activity</h5>
-          </p>
+          <h5 style={{ fontWeight: "480" }}>Activity</h5>
           <Button id="but1" onClick={handleShow}>
             Start a post
           </Button>
         </div>
-        <Link>
+        <Link to="/">
           <div className="text-left ml-4 mr-4 d-flex followers">
             9 followers
           </div>

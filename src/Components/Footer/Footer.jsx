@@ -62,7 +62,7 @@ const Footer = () => {
             <Col xs={12} md={3}>
               <div>
                 <label
-                  for="dropdown-button-drop-up"
+                  htmlFor="dropdown-button-drop-up"
                   className="mr-5 text-muted"
                 >
                   <small>Select Language</small>

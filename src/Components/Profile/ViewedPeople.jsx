@@ -30,7 +30,7 @@ const ViewedPeople = ({ message, data }) => {
     <ul className="people">
       {data.data &&
         data.data.slice(startingIndex, endingIndex).map((person) => (
-          <li className="d-flex mt-3">
+          <li className="d-flex mt-3" key={person.name + person.title}>
             <Link to={"/home/" + person._id} className="d-flex mt-3">
               <div className="card-imgs">
                 <Card.Img src={person.image} alt="user" />

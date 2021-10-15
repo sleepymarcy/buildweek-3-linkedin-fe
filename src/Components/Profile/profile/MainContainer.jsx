@@ -18,6 +18,8 @@ const MainContainer = ({ match }) => {
   const localHost = process.env.REACT_APP_LOCALHOST;
   const personalId = 2;
 
+  const profileId = match.params.id;
+  const myProfileId = 1;
   const [PersonInfo, setPersonInfo] = useState([]);
   //   !
   const [BtnsUpdate, setBtnsUpdate] = useState({
@@ -101,6 +103,7 @@ const MainContainer = ({ match }) => {
                   imgSrc={PersonInfo.data.image}
                   renewData={() => fetchPerson()}
                   valueAvatar={false}
+                  clickOff={match.params.id ? true : false}
                 />
               )}
             </Col>
@@ -158,19 +161,29 @@ const MainContainer = ({ match }) => {
                 <div className="mt-3 d-flex flex-wrap">
                   {/* opento */}
                   <div className="position-relative">
-                    <Button
-                      className="font-weight-bold position-relative"
-                      style={{ backgroundColor: "#0a66c2" }}
-                      onClick={() =>
-                        setBtnsUpdate({
-                          more: false,
-                          addSection: false,
-                          openTo: !BtnsUpdate.openTo,
-                        })
-                      }
-                    >
-                      {match.params.id ? "Connect" : "Open to"}
-                    </Button>
+                    {!match.params.id ? (
+                      <Button
+                        className="font-weight-bold position-relative"
+                        style={{ backgroundColor: "#0a66c2" }}
+                        onClick={() =>
+                          setBtnsUpdate({
+                            more: false,
+                            addSection: false,
+                            openTo: !BtnsUpdate.openTo,
+                          })
+                        }
+                      >
+                        Open to{" "}
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={(e) => sendConnect(myProfileId, profileId)}
+                        className="font-weight-bold position-relative"
+                        style={{ backgroundColor: "#0a66c2" }}
+                      >
+                        Connect
+                      </Button>
+                    )}
                     {BtnsUpdate.openTo && (
                       <OpenTo personAcc={match.params.id} />
                     )}
@@ -212,7 +225,7 @@ const MainContainer = ({ match }) => {
                     >
                       More
                     </Button>
-                    {BtnsUpdate.more && <More personAcc={match.params.id} />}
+                    {BtnsUpdate.more && <More personAcc={1} />}
                   </div>
                 </div>
               </Col>

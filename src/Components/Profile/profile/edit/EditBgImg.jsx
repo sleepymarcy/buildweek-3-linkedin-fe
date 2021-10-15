@@ -12,7 +12,11 @@ function EditBgImg({
   title,
   postId,
   fetchPosts,
+<<<<<<< HEAD
   profileId,
+=======
+  clickOff,
+>>>>>>> connections
 }) {
   const localHost = process.env.REACT_APP_LOCALHOST;
 
@@ -90,7 +94,7 @@ function EditBgImg({
           className="avatar"
           src={title === "post-img" ? postImg : imgSrc}
           alt=""
-          onClick={handleShow}
+          onClick={!clickOff && handleShow}
           style={{ cursor: "pointer" }}
         />
       )}

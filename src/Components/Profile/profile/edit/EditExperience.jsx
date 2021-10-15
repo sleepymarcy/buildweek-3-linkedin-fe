@@ -183,11 +183,18 @@ export default function EditExperience({ userId, expId }) {
     <>
       <div className=" d-flex justify-content-center align-items-center edit-info-pencil">
         <div className="d-flex">
+<<<<<<< HEAD
           <i
             class="bi bi-pencil lighter-color ml-auto"
             style={{ fontSize: "1.3rem" }}
             onClick={handleShow}
           ></i>
+=======
+            <i className="bi bi-pencil lighter-color ml-auto"
+            style={{fontSize:"1.3rem"}} 
+            onClick={handleShow}>       
+            </i>
+>>>>>>> connections
         </div>
       </div>
       <Modal className="modalEditInfo" show={show} onHide={handleClose}>

@@ -13,10 +13,6 @@ const Experience = ({ match }) => {
   console.log("THIS IS MATCH.PARAMS", match.params.id);
   useEffect(() => {
     fetchExp();
-    // console.log("Mounted", userExperience )
-    // console.log("USER ID", userExperience[0].user)
-    // fetchedUserId = userExperience[0].user
-    // console.log("FETCHED USER ID",fetchedUserId)
   }, [match.params.id]);
 
   // useEffect(() => {
