@@ -1,14 +1,13 @@
 .experience-container {
- 
   background-color: white;
-  border: 1px solid #F3F2EF ;
+  border: 1px solid #f3f2ef;
   border-radius: 10px;
-
+  overflow: hidden;
 }
-.lighter-color{
+.lighter-color {
   color: #666666;
 }
-.lighter-color-activity{
+.lighter-color-activity {
   color: #807f7f;
   font-weight: 500;
 }
@@ -16,18 +15,43 @@
   height: 60px;
   width: 60px;
 }
-.company{
+.company {
   font-size: 0.9rem;
   height: 16px;
   margin-top: 4px;
- }
- .date {
+}
+.date {
   color: #807f7f;
   font-size: 0.9rem;
-  height:16px;
- }
- .area {
+  height: 16px;
+}
+.area {
   color: #807f7f;
   font-size: 0.9rem;
-  
- }
+}
+.show-more {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  border: none;
+  text-align: center;
+  justify-content: center;
+  padding: 0.2rem 0.5rem;
+  min-height: 1.5rem;
+  line-height: 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-decoration: none !important;
+}
+.show-more:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+.show-more:hover span {
+  color: rgba(0, 0, 0, 0.6);
+}
+.show-more span {
+  padding: 0.5rem;
+  text-decoration: none;
+  color: rgba(73, 73, 73, 0.6);
+}

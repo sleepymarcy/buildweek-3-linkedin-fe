@@ -14,6 +14,7 @@ import { ImPencil } from "react-icons/im";
 import { AiFillEye } from "react-icons/ai";
 import { useRef } from "react";
 import { RiArrowLeftLine } from "react-icons/ri";
+import { Hint } from "react-autocomplete-hint";
 
 import "../../../../css/editModal.css";
 import EditSecondModal from "./EditSecondModal";
@@ -30,12 +31,13 @@ export default function EditInfo({
   email,
   renewData,
 }) {
+  const [FormerName, setFormerName] = useState();
+  const localHost = process.env.REACT_APP_LOCALHOST;
   // CONSTANT
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [FormerName, setFormerName] = useState();
-  const localHost = process.env.REACT_APP_LOCALHOST;
+
   // Loaders
   const [Loading, setLoading] = useState(false);
   const [Success, setSuccess] = useState(false);
@@ -46,7 +48,7 @@ export default function EditInfo({
     // findCountry();
   }, []);
   //   COUNTRIES
-  const [Countries, setCountries] = useState({});
+  const [hintData, setHintData] = useState([]);
   //   EDITING INFO
   const [EditingInfo, setEditingInfo] = useState({
     name: name,
@@ -68,32 +70,18 @@ export default function EditInfo({
     // setLocData();
     postData();
   };
-  // COUNTRIES
-  // const [Country, setCountry] = useState({
-  //   city: null,
-  //   republ: null,
-  // });
-  // const setLocData = () => {
-  //   let dat = Country.city + " " + Country.republ;
-  //   setEditingInfo({
-  //     ...EditingInfo,
-  //     area: dat,
-  //   });
-  // };
-
-  // const findCountry = () => {
-  //   const [city, state, ...republ] = area.split(" ");
-  //   console.log(city, state, republ.join(" "));
-  //   setCountry({ city: city + " " + state, republ: republ.join(" ") });
-  // };
   //   FETCHING
   const fetchCountries = async () => {
     try {
-      let response = await fetch("https://restcountries.eu/rest/v2/all");
+      let response = await fetch(
+        `http://api.countrylayer.com/v2/all?access_key=${process.env.REACT_APP_COUNTRY_API_KEY}`
+      );
       if (response.ok) {
-        let dataCount = await response.json();
-        console.log(dataCount);
-        setCountries({ data: dataCount });
+        let countries = await response.json();
+        console.log(countries);
+        const countriesNames = [];
+        countries.map((c) => countriesNames.push(c.name));
+        setHintData(countriesNames);
       } else {
         console.log("Error");
       }
@@ -101,8 +89,6 @@ export default function EditInfo({
       console.log(err);
     }
   };
-  //   POSTING DATA
-  //   URL
 
   const postData = async () => {
     setLoading(true);
@@ -144,6 +130,8 @@ export default function EditInfo({
   const onNextClick = () => {
     ref.current.next();
   };
+
+  // console.log(Suggestion);
   // JSX !
   return (
     <>
@@ -199,35 +187,27 @@ export default function EditInfo({
                       />
                     </Form.Group>
                   </Col>
-                  {/* FORMER NAME */}
-                  <Col xs="12">
-                    {FormerName && (
-                      <Form.Group controlId="formFormer">
-                        <Form.Label>Former Name *</Form.Label>
-                        <Form.Control
-                          type="text"
-                          placeholder="...former name"
-                        />
-                      </Form.Group>
-                    )}
-                  </Col>
-                  <Col xs="12 mt-4">
-                    <h6 className="text-muted ml-3">
-                      + Record name pronunciation
-                    </h6>
-                    <p className="text-muted" style={{ fontSize: "0.9rem" }}>
-                      Name pronunciation can only be added using our mobile app.
-                    </p>
-                  </Col>
+
                   <Col xs="12">
                     <Form.Group controlId="formGridState">
-                      <Form.Label>Pronouns</Form.Label>
-                      <Form.Control as="select" defaultValue="Pronouns...">
-                        <option>Pronouns...</option>
-                        <option>She/Her</option>
-                        <option>He/Him</option>
-                        <option>They/Them</option>
-                        <option>Custom</option>
+                      <Form.Label>Titles</Form.Label>
+                      <Form.Control
+                        as="select"
+                        // onChange={(e) =>
+                        //   dataSet(
+                        //     "name",
+                        //     e.target.value + " " + EditingInfo.name
+                        //   )
+                        // }
+                        defaultValue="Titles..."
+                      >
+                        <option>Titles...</option>
+                        <option value="Miss">Miss</option>
+                        <option value="Mr">Mr</option>
+                        <option value="Mrs.">Mrs</option>
+                        <option value="Ms.">Ms</option>
+                        <option value="Dr.">Dr.</option>
+                        <option value="Md.">Md.</option>
                       </Form.Control>
                       <Form.Text className="text-muted">
                         Let others know how to refer to you.{" "}
@@ -251,124 +231,39 @@ export default function EditInfo({
                   </Col>
                   <Col xs="12">
                     <Form.Group controlId="formHeadLine">
-                      <Form.Label>Headline *</Form.Label>
+                      <Form.Label>Curent position</Form.Label>
                       <Form.Control
                         type="text"
                         value={EditingInfo.title}
                         onChange={(e) => dataSet("surname", e.target.value)}
-                        placeholder="... text"
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col xs="12">
-                    <Form.Group controlId="formCurent">
-                      <Form.Label>Curent position</Form.Label>
-                      <Form.Control
-                        type="text"
                         placeholder="... curent position"
                       />
-                      <Form.Text className="addFormerBtn font-weight-bold pl-3">
-                        Add new postition
-                      </Form.Text>
                     </Form.Group>
                   </Col>
+
                   <Col xs="12">
-                    <Form.Group controlId="checkCompany">
-                      <Form.Check
-                        className="checkbox-edit"
-                        type="checkbox"
-                        label="Show current company in my intro"
-                        variant="success"
-                      />
-                    </Form.Group>
-                  </Col>
-                  {/* EDUCATION */}
-                  <Col xs="12">
-                    <Form.Group controlId="formHeadLine">
-                      <Form.Label>Education</Form.Label>
-                      <Form.Control
-                        type="text"
-                        value={EditingInfo.education}
-                        // onChange={(e) => dataSet("education", e.target.value)}
-                        placeholder="... text"
-                      />
-                      <Form.Text className="addFormerBtn font-weight-bold pl-3">
-                        Add new education
-                      </Form.Text>
-                    </Form.Group>
-                  </Col>
-                  <Col xs="12">
-                    <Form.Group controlId="checkEducation">
-                      <Form.Check
-                        className="checkbox-edit"
-                        type="checkbox"
-                        label="Show education in my intro"
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col xs="12">
-                    <Form.Group controlId="formCountry">
-                      <Form.Label>Country/Region *</Form.Label>
-                      <Form.Control
-                        // as="select"
-                        // defaultValue={
-                        //   Countries.data &&
-                        //   Countries.data.filter((one) => one.name.includes(""))
-                        // }
+                    <label for="formCountry">Country/Region</label>
+                    <Hint options={hintData} allowTabFill>
+                      <input
+                        className="form-control"
+                        controlId="formCountry"
                         value={EditingInfo.area}
+                        // onChange={(e) => displayMatches(e.target.value)}
                         onChange={(e) =>
                           setEditingInfo({
                             ...EditingInfo,
                             area: e.target.value,
                           })
                         }
-                      >
-                        {/* {Countries.data &&
-                          Countries.data.map((count) => (
-                            <option key={count.name + count.numericCode}>
-                              {count.name}
-                            </option>
-                          ))} */}
-                      </Form.Control>
-                    </Form.Group>
-                  </Col>
-                  <Col xs="6">
-                    <Form.Group controlId="formPostal">
-                      <Form.Label>Postal code</Form.Label>
-                      <Form.Control
-                        type="text"
-                        value={EditingInfo.postal}
-                        // onChange={(e) => dataSet("education", e.target.value)}
-                        placeholder="...postal"
                       />
-                    </Form.Group>
+                    </Hint>
                   </Col>
-                  <Col xs="6">
-                    <Form.Group controlId="formCountry">
-                      <Form.Label>Locations within this area</Form.Label>
-                      <Form.Control type="text" placeholder="...Country" />
-                    </Form.Group>
-                  </Col>
-                  {/* INDUSTRY */}
-                  <Col xs="12">
-                    <Form.Group controlId="formIndustry">
-                      <Form.Label>Industry *</Form.Label>
-                      <Form.Control
-                        as="select"
-                        defaultValue="Industry..."
-                        value={EditingInfo.industry}
-                      >
-                        <option>Industry...</option>
-                        <option>Industry...</option>
-                        <option>Industry...</option>
-                      </Form.Control>
-                    </Form.Group>
-                  </Col>
+
                   <Col xs="12">
                     <Form.Group controlId="formcontactInfo">
                       <Form.Label>Contact info</Form.Label>
                       <div className="contact-info-change d-flex justify-content-between align-items-end">
-                        <p className="mb-0">Some text</p>
+                        <p className="mb-0">Edit Contact Info</p>
                         <div
                           className="edit-pencil-contact"
                           onClick={() => onNextClick()}

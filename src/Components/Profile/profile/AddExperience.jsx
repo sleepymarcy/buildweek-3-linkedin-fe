@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRef } from "react";
 import { AiFillEye } from "react-icons/ai";
 import "../../../css/editModal.css";
+import { Hint } from "react-autocomplete-hint";
 
 import { DropdownDate, DropdownComponent } from "react-dropdown-date";
 
@@ -12,8 +13,6 @@ export default function AddExperience({ userId }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const token = process.env.REACT_APP_TOKENACCESS;
 
   // Date
 
@@ -36,7 +35,9 @@ export default function AddExperience({ userId }) {
   const [selectedEndDate, setSelectedEndDate] = useState("2021-09-09");
   // console.log("THIS IS STATE SELECTED DATE", selectedDate)
   //   REFRESH
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetchCountries();
+  }, []);
 
   //   EDITING INFO
   const [EditingInfo, setEditingInfo] = useState({
@@ -48,6 +49,7 @@ export default function AddExperience({ userId }) {
     area: "",
     profileId: userId,
   });
+
   // Data set
   const dataSet = (valname, valdata) => {
     setEditingInfo({ ...EditingInfo, [valname]: valdata });
@@ -65,12 +67,33 @@ export default function AddExperience({ userId }) {
     handleClose();
   };
 
+  const fetchCountries = async () => {
+    try {
+      let response = await fetch(
+        `http://api.countrylayer.com/v2/all?access_key=${process.env.REACT_APP_COUNTRY_API_KEY}`
+      );
+      if (response.ok) {
+        let countries = await response.json();
+        const countriesNames = [];
+        countries.map((c) => countriesNames.push(c.name));
+        setHintData(countriesNames);
+      } else {
+        console.log("Error");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const [hintData, setHintData] = useState([]);
+
   //   POSTING DATA
   //   URL
   const localHost = process.env.REACT_APP_LOCALHOST;
   const url = `${localHost}/experience`;
 
-  const postData = async () => {
+  const postData = async (e) => {
+    // e.preventDefault();
     try {
       let response = await fetch(url, {
         method: "POST",
@@ -81,9 +104,47 @@ export default function AddExperience({ userId }) {
       });
       if (response.ok) {
         let data = await response.json();
-        console.log(data);
+        console.log(data.id);
+        imageUpload(data.id);
       } else {
         console.log("Error");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const [ImageUpld, setImageUpld] = useState({ file: null });
+  const [Success, setSuccess] = useState(false);
+  const uploadF = (e) => {
+    console.log(e.target.files[0]);
+    setImageUpld({ file: e.target.files[0] });
+  };
+
+  const imageUpload = async (id) => {
+    const url = `${localHost}/experience/${id}/picture`;
+
+    let formData = new FormData();
+    let file = ImageUpld.file;
+    formData.append("image", file);
+    console.log("formatDAta: ", formData);
+    // ==
+    try {
+      let response = await fetch(url, {
+        method: "POST",
+        body: formData,
+        // mode: "no-cors",
+      });
+      let data = await response.json();
+      if (response.ok) {
+        console.log(response);
+        console.log(data);
+        setSuccess(true);
+        setTimeout(() => {
+          setSuccess(false);
+        }, 1500);
+      } else {
+        console.log(response);
       }
     } catch (err) {
       console.log(err);
@@ -122,29 +183,7 @@ export default function AddExperience({ userId }) {
                   />
                 </Form.Group>
               </Col>
-              <Col xs="12">
-                <Form.Group controlId="formGridState">
-                  <Form.Label>Employment type</Form.Label>
-                  <Form.Control as="select" defaultValue="Hero...">
-                    <option>-</option>
-                    <option>Full-time</option>
-                    <option>Part-time</option>
-                    <option>Self-employed</option>
-                    <option>Freelance</option>
-                    <option>Contract</option>
-                    <option>Internship</option>
-                    <option>Apprenticeship</option>
-                  </Form.Control>
-                  <Form.Text className="text-muted">
-                    Country-specific employment types.{" "}
-                    <div>
-                      <a className="contact-info font-weight-bold">
-                        Learn more
-                      </a>
-                    </div>
-                  </Form.Text>
-                </Form.Group>
-              </Col>
+
               <Col xs="12">
                 <Form.Group controlId="formHeadLine">
                   <Form.Label>Company *</Form.Label>
@@ -157,25 +196,16 @@ export default function AddExperience({ userId }) {
                 </Form.Group>
               </Col>
               <Col xs="12">
-                <Form.Group controlId="formCurent">
-                  <Form.Label>Location</Form.Label>
-                  <Form.Control
-                    type="text"
+                <label for="formCountry">Location country</label>
+                <Hint options={hintData} allowTabFill>
+                  <input
+                    className="form-control"
+                    controlId="formCountry"
                     value={EditingInfo.area}
-                    onChange={(e) => dataSet("area", e.target.value)}
                     placeholder="Ex: London, United Kingdom"
+                    onChange={(e) => dataSet("area", e.target.value)}
                   />
-                </Form.Group>
-              </Col>
-              <Col xs="12">
-                <Form.Group controlId="checkCompany">
-                  <Form.Check
-                    className="checkbox-edit"
-                    type="checkbox"
-                    label="I`m currently working in this role"
-                    variant="success"
-                  />
-                </Form.Group>
+                </Hint>
               </Col>
               <Col xs="6">
                 <Form.Group controlId="formHeadLine">
@@ -233,32 +263,7 @@ export default function AddExperience({ userId }) {
                   }}
                 />
               </Col>
-              <Col xs="6"></Col>
               <Col xs="12" className="mt-3">
-                <Form.Group controlId="checkEducation">
-                  <Form.Check
-                    className="checkbox-edit"
-                    type="checkbox"
-                    label="Update my industry"
-                  />
-                </Form.Group>
-              </Col>
-              <Col xs="12">
-                <Form.Group controlId="checkEducation">
-                  <Form.Check
-                    className="checkbox-edit"
-                    type="checkbox"
-                    label="Update my headline"
-                  />
-                </Form.Group>
-              </Col>
-              <Col xs="12">
-                <Form.Group controlId="exampleForm.ControlTextarea1">
-                  <Form.Label>Headline *</Form.Label>
-                  <Form.Control as="textarea" rows={2} />
-                </Form.Group>
-              </Col>
-              <Col xs="12">
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                   <Form.Label>Description</Form.Label>
                   <Form.Control
@@ -267,6 +272,12 @@ export default function AddExperience({ userId }) {
                     value={EditingInfo.description}
                     onChange={(e) => dataSet("description", e.target.value)}
                   />
+                </Form.Group>
+              </Col>
+              <Col xs="12">
+                <Form.Group controlId="formSurname">
+                  <Form.Label>Add Image</Form.Label>
+                  <Form.File id="fileUpload" onChange={uploadF} />
                 </Form.Group>
               </Col>
             </Row>

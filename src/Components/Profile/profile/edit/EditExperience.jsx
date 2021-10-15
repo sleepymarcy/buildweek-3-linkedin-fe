@@ -40,22 +40,6 @@ export default function EditExperience({ userId, expId }) {
     fetchExp();
   }, []);
 
-  // EXPERIENCE Model:
-  // {
-  //     "_id": "5d925e677360c41e0046d1f5",  //server generated
-  //     "role": "CTO",
-  //     "company": "Strive School",
-  //     "startDate": "2019-06-16",
-  //     "endDate": "2019-06-16", //could be null
-  //     "description": "Doing stuff here and there",
-  //     "area": "Berlin",
-  //     "username": "admin",  //server generated
-  //     "createdAt": "2019-09-30T19:58:31.019Z",  //server generated
-  //     "updatedAt": "2019-09-30T19:58:31.019Z",  //server generated
-  //     "__v": 0  //server generated
-  //     "image": ... //server generated on upload
-  // }
-
   //   EDITING INFO
   const [EditingInfo, setEditingInfo] = useState({
     role: "",
@@ -130,14 +114,14 @@ export default function EditExperience({ userId, expId }) {
       console.log(err);
     }
   };
+
   const deleteFunction = async (e) => {
     try {
       let response = await fetch(url, {
         method: "DELETE",
         body: JSON.stringify(EditingInfo),
         headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          Authorization: "Bearer " + token,
+          "Content-type": "application/json",
         },
       });
       if (response.ok) {

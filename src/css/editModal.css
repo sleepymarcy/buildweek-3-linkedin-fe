@@ -101,3 +101,7 @@ form label {
     width: 90%;
   }
 }
+.input-hint {
+  display: block;
+  width: 100%;
+}

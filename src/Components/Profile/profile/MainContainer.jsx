@@ -47,7 +47,9 @@ const MainContainer = ({ match }) => {
       if (response.ok) {
         let data = await response.json();
         console.log(data);
+
         setPersonInfo({ data });
+        console.log(PersonInfo.data.bio);
       } else {
         console.log("Error");
       }
@@ -57,6 +59,7 @@ const MainContainer = ({ match }) => {
   };
 
   //   JSX
+
   return (
     <>
       <div className="position-relative">
@@ -270,7 +273,7 @@ const MainContainer = ({ match }) => {
         </div>
       </div>
       <Dashboard />
-      <About />
+      <About userBio={PersonInfo && PersonInfo.data && PersonInfo.data.bio} />
       <ProfileHomePost />
       <Experience />
     </>

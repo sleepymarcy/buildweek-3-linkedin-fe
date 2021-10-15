@@ -8,7 +8,7 @@ import EditExperience from "./edit/EditExperience";
 
 const Experience = ({ match }) => {
   const [userExperience, setExperience] = useState([]);
-  const token = process.env.REACT_APP_TOKENACCESS;
+  const [showMore, setShowMore] = useState(false);
   // const fetchedUserId = ""
   console.log("THIS IS MATCH.PARAMS", match.params.id);
   useEffect(() => {
@@ -30,9 +30,7 @@ const Experience = ({ match }) => {
     try {
       let response = await fetch(
         match.params.id
-          ? "https://striveschool-api.herokuapp.com/api/profile/" +
-              match.params.id +
-              "/experiences"
+          ? `${localHost}/profile/${match.params.id}`
           : `${localHost}/profile/2`,
         {
           method: "GET",
@@ -50,69 +48,78 @@ const Experience = ({ match }) => {
       }
     } catch (erorr) {}
   };
-
+  console.log(personalId);
   return (
     <>
       <div className="experience-container mt-3">
-        <div className="text-left ml-4 mr-4 mt-4 mb-3">
+        <div className="text-left ml-4 mr-4 mt-4">
           <div className="text-left mt-4 mb-3 d-flex">
             <h5 style={{ fontWeight: "480" }}>Experience</h5>
 
             <div className="d-flex ml-auto">
-              <AddExperience userId={2} />
+              {personalId === 2 && <AddExperience userId={2} />}
             </div>
           </div>
-          {userExperience.map((exp) => (
-            <div className="mt-2">
-              <Row>
-                <Col xs="1">
-                  {!exp.image ? (
-                    <div></div>
-                  ) : (
-                    <img className="image" src={exp.image} alt="" />
-                  )}
-                </Col>
-                <Col xs="11">
-                  <div className="ml-4">
-                    <div
-                      className="text-left d-flex"
-                      style={{ height: "15px" }}
-                    >
-                      <h6 className="my-0 py-0"> {exp.role} </h6>
-                      <div className="d-flex ml-auto">
-                        <EditExperience
-                          userId={exp.user}
-                          expId={exp.id}
-                          arrayLenth={userExperience.length}
-                        />
-                      </div>
-                    </div>
-                    <Link>
-                      <div className="text-left company"> {exp.company}</div>
-                      {!exp.endDate ? (
-                        <div className="lighter-color text-left my-0 py-0 date">
-                          {format(parseISO(exp.startDate), "MMM yyyy")} -{" "}
+          {userExperience
+            .reverse()
+            .slice(0, showMore === true ? userExperience.length : 4)
+            .map((exp, key) => (
+              <div className="mt-2" key={exp.id}>
+                <Row>
+                  <Col xs="1">
+                    {!exp.image ? (
+                      <div></div>
+                    ) : (
+                      <img className="image" src={exp.image} alt="" />
+                    )}
+                  </Col>
+                  <Col xs="11">
+                    <div className="ml-4">
+                      <div
+                        className="text-left d-flex"
+                        style={{ height: "15px" }}
+                      >
+                        <h6 className="my-0 py-0"> {exp.role} </h6>
+                        <div className="d-flex ml-auto">
+                          <EditExperience
+                            userId={exp.user}
+                            expId={exp.id}
+                            arrayLenth={userExperience.length}
+                          />
                         </div>
-                      ) : (
-                        <div className="lighter-color text-left my-0 py-0 date">
-                          {format(parseISO(exp.startDate), "MMM yyyy")} -{" "}
-                          {format(parseISO(exp.endDate), "MMM yyyy")}
-                        </div>
-                      )}
-                      <div className="lighter-color text-left my-0 py-0 area">
-                        {exp.area}{" "}
                       </div>
-                    </Link>
-                    <div className="text-left">
-                      <p style={{ fontSize: "15px" }}>{exp.description}</p>
+                      <Link>
+                        <div className="text-left company"> {exp.company}</div>
+                        {!exp.endDate ? (
+                          <div className="lighter-color text-left my-0 py-0 date">
+                            {format(parseISO(exp.startDate), "MMM yyyy")} -{" "}
+                          </div>
+                        ) : (
+                          <div className="lighter-color text-left my-0 py-0 date">
+                            {format(parseISO(exp.startDate), "MMM yyyy")} -{" "}
+                            {format(parseISO(exp.endDate), "MMM yyyy")}
+                          </div>
+                        )}
+                        <div className="lighter-color text-left my-0 py-0 area">
+                          {exp.area}{" "}
+                        </div>
+                      </Link>
+                      <div className="text-left">
+                        <p style={{ fontSize: "15px" }}>{exp.description}</p>
+                      </div>
+                      <hr />
                     </div>
-                    <hr />
-                  </div>
-                </Col>
-              </Row>
-            </div>
-          ))}
+                  </Col>
+                </Row>
+              </div>
+            ))}
         </div>
+        <a
+          className="show-more"
+          onClick={() => setShowMore(showMore == false ? true : false)}
+        >
+          <span>{showMore == false ? "Show more" : "Show less"}</span>
+        </a>
       </div>
     </>
   );
