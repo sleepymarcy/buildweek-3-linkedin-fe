@@ -1,0 +1,56 @@
+.connectCont {
+  background-color: white;
+  box-shadow: 0 4px 3px rgb(128, 128, 128, 0.8);
+  width: 100%;
+  padding: 0.5rem 0;
+  margin-top: 0.2rem;
+}
+.connBtns {
+  margin: 0 0.2rem;
+  height: 2rem;
+}
+
+.boderMid {
+  border-left: 1px solid rgba(128, 128, 128, 0.438) !important;
+  width: 3px;
+}
+.checkBoxs {
+  padding: 0 1.2rem;
+}
+.checkbox {
+  margin: 0.6rem 0;
+  display: flex;
+  font-size: 0.8rem;
+  width: 14rem;
+}
+
+.checkbox input {
+  height: 1.4rem;
+  width: 1.4rem;
+  margin-right: 0.2rem;
+}
+.ressetBtn {
+  border: 0px solid grey;
+  background-color: white;
+  transition: 0.2s;
+}
+.ressetBtn:hover {
+  border-radius: 10%;
+  background-color: #f3f2ef;
+}
+.mainConnPersCont {
+  border-radius: 5px;
+  background-color: white !important;
+}
+
+.image-person {
+  max-width: 75px;
+  aspect-ratio: 1/1;
+  width: 100%;
+  /* height: 100%; */
+  object-fit: cover;
+  border-radius: 50%;
+}
+.border-bot {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+}

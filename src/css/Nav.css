@@ -1,196 +1,193 @@
 .navbar {
-    padding: 0 !important;
-    border-bottom: 1px solid #e0e0e0 !important;
-    max-height: 52px;
+  padding: 0 !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+  max-height: 52px;
 }
 
 .navbar-nav {
-    max-height: 52px;
+  max-height: 52px;
 }
 
 .nav-wrapper {
-    padding: 0 !important;
-    align-items: center;
-    display: flex;
-    margin: 0 auto;
-    min-height: 100%;
-    width: 1128px;
+  padding: 0 !important;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  height: 1rem !important;
 }
 
 .nav {
-    padding-left: 80px;
+  padding-left: 80px;
 }
 
 .search {
-    border: 0 !important;
-    background-color: #eef3f8 !important;
-    vertical-align: middle;
+  border: 0 !important;
+  background-color: #eef3f8 !important;
+  vertical-align: middle;
 }
 
-
 .dropdown-wrapper {
-    box-sizing: border-box;
-    display: block;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    max-block-size: 52px;
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  max-block-size: 52px;
 }
 
 .link-dropdown {
-    align-items: center;
-    background: transparent;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    font-size: 1.2rem;
-    font-weight: 400;
-    justify-content: center;
-    line-height: 1.5;
-    min-height: 52px;
-    min-width: 80px;
-    position: relative;
-    text-decoration: none;
-    color: #666666 !important;
+  align-items: center;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  font-weight: 400;
+  justify-content: center;
+  line-height: 1.5;
+  min-height: 52px;
+  min-width: 80px;
+  position: relative;
+  text-decoration: none;
+  color: #666666 !important;
 }
 
 .img-dropdown {
-    margin-top: 5px;
-    border-radius: 50%;
-    align-items: center;
-    background: transparent;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    height: 24px;
-    width: 24px;
+  margin-top: 5px;
+  border-radius: 50%;
+  align-items: center;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 24px;
+  width: 24px;
 }
 
 .user-button-wrapper {
-    text-align: center;
-    
+  text-align: center;
 }
 
 .user-button {
-    font-size: 13px;
-    border-radius: 20px;
-    padding: 2px 35px !important;
+  font-size: 13px;
+  border-radius: 20px;
+  padding: 2px 35px !important;
 }
 
 .toggle-dropdown {
-    padding: 0 !important;
+  padding: 0 !important;
 }
 
 .toggle-dropdown:hover {
-    color: black !important;
+  color: black !important;
 }
 
 .text-dropdown {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
 }
 
 .main-dropdown {
-    font-size: 16px;
-    color: black;
-    font-weight: 500;
+  font-size: 16px;
+  color: black;
+  font-weight: 500;
 }
 
 .secondary-dropdown {
-    font-size: 14px;
-    color: #666666;
+  font-size: 14px;
+  color: #666666;
 }
 
 .line {
-    border-right: 1px solid #e0e0e0 !important;
-    height: 52px;
+  border-right: 1px solid #e0e0e0 !important;
+  height: 52px;
 }
 
 .premium {
-    text-align: center;
-    max-width: 100px;
-    word-wrap: break-word;
-    color: #915907;
+  text-align: center;
+  max-width: 100px;
+  word-wrap: break-word;
+  color: #915907;
 }
 
 .nav-link.prem:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .link-dropdown:hover {
-    color:black !important;
+  color: black !important;
 }
 
 .svg.path {
-    color: #666666;
+  color: #666666;
 }
 
-
 .MuiDrawer-paper {
-    width: 380px;
-    margin-top: 52px;
-    border-radius: 10px;
-    display: flex;
+  width: 380px;
+  margin-top: 52px;
+  border-radius: 10px;
+  display: flex;
 }
 
 .work-content {
-    display: block;
-    overflow: auto;
-    min-height: 5.6rem;
-    margin-top: 48px;
-    padding: 16px 24px 32px 24px;
+  display: block;
+  overflow: auto;
+  min-height: 5.6rem;
+  margin-top: 48px;
+  padding: 16px 24px 32px 24px;
 }
 
 .GrClose {
-    width: 24px;
-    height: 24px;
-    fill: #666666;
+  width: 24px;
+  height: 24px;
+  fill: #666666;
 }
 
 .work-button {
-    border: 0;
-    background-color: white;
-    float: right;
+  border: 0;
+  background-color: white;
+  float: right;
 }
 
 .work-head {
-    padding: 15px 15px 0 0;
-    float: right;
+  padding: 15px 15px 0 0;
+  float: right;
 }
 
-.h5, h5 {
-    font-size: 1em;
+.h5,
+h5 {
+  font-size: 1em;
 }
 
 .work-title {
-    padding: 0 24px;
+  padding: 0 24px;
 }
 
 .work-list {
-    font-weight: 500;
-    font-size: 0.9rem !important;
-    margin-top: 5px;
+  font-weight: 500;
+  font-size: 0.9rem !important;
+  margin-top: 5px;
 }
-    
+
 .work-list-sec:hover {
-    text-decoration: underline #0a66c2 !important;
+  text-decoration: underline #0a66c2 !important;
 }
 
 .icon-list {
-    vertical-align: middle;
-    text-align: left;
+  vertical-align: middle;
+  text-align: left;
 }
 
 .last {
-    padding: 4px 24px;
+  padding: 4px 24px;
 }
 
 ul {
-    padding: 0 !important;
-    margin: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 small {
-    color: #666666;
+  color: #666666;
 }
