@@ -15,9 +15,9 @@ import ProfileHomePost from "../../Feed/Post/ProfileHomePost.jsx";
 import Experience from "./Experience";
 
 const MainContainer = ({ match }) => {
-  const token = process.env.REACT_APP_TOKENACCESS;
+  const localHost = process.env.REACT_APP_LOCALHOST;
+  const personalId = 2;
 
-  const personId = "";
   const [PersonInfo, setPersonInfo] = useState([]);
   //   !
   const [BtnsUpdate, setBtnsUpdate] = useState({
@@ -28,11 +28,9 @@ const MainContainer = ({ match }) => {
   //   UPDATE INFO
   useEffect(() => {
     fetchPerson();
-    fetchPersonExpir();
   }, []);
   useEffect(() => {
     fetchPerson();
-    fetchPersonExpir();
   }, [match.params]);
   //   !
   //   FETCHING
@@ -40,50 +38,24 @@ const MainContainer = ({ match }) => {
     try {
       let response = await fetch(
         match.params.id
-          ? "https://striveschool-api.herokuapp.com/api/profile/" +
-              match.params.id
-          : "https://striveschool-api.herokuapp.com/api/profile/me",
+          ? `${localHost}/profile/${match.oarams.id}`
+          : `${localHost}/profile/${personalId}`,
         {
           method: "GET",
-          headers: {
-            Authorization: "Bearer " + token,
-          },
         }
       );
       if (response.ok) {
         let data = await response.json();
+        console.log(data);
         setPersonInfo({ data });
       } else {
         console.log("Error");
       }
-    } catch (erorr) {}
+    } catch (erorr) {
+      console.log(erorr);
+    }
   };
-  //   FETCHING EXPP
-  const [PersonExpr, setPersonExpr] = useState({});
-  const fetchPersonExpir = async () => {
-    try {
-      let response = await fetch(
-        match.params.id
-          ? "https://striveschool-api.herokuapp.com/api/profile/" +
-              match.params.id +
-              "/experiences"
-          : "https://striveschool-api.herokuapp.com/api/profile/6135e0aa7be6c10015f9db9c/experiences",
-        {
-          method: "GET",
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      if (response.ok) {
-        let data = await response.json();
-        setPersonExpr({ data });
-      } else {
-        console.log("Error");
-      }
-    } catch (erorr) {}
-  };
-  //   !
+
   //   JSX
   return (
     <>
@@ -104,9 +76,10 @@ const MainContainer = ({ match }) => {
                   alt=""
                 />
               </div>
-              {!match.params.id && PersonInfo.data && (
+              {!match.params.id && PersonInfo && PersonInfo.data && (
                 <EditBgImg
                   imgSrc={PersonInfo.data.image}
+                  profileId={PersonInfo.data.id}
                   renewData={() => fetchPerson()}
                   valueAvatar={true}
                 />
@@ -268,16 +241,18 @@ const MainContainer = ({ match }) => {
                     )
                   )}
                 </div>
-                {PersonExpr.data ? (
-                  PersonExpr.data.slice(0, 3).map((person) => (
-                    <a href="" className="d-flex align-items-center my-1">
-                      <img
-                        src={person.image}
-                        alt=""
-                        style={{ height: "2rem" }}
-                      />
+                {PersonInfo &&
+                PersonInfo.data &&
+                PersonInfo.data.experiences ? (
+                  PersonInfo.data.experiences.slice(0, 3).map((exp) => (
+                    <a
+                      href=""
+                      className="d-flex align-items-center my-1"
+                      key={exp.id}
+                    >
+                      <img src={exp.image} alt="" style={{ height: "2rem" }} />
                       <small className="font-weight-bold ml-2">
-                        {person.role}
+                        {exp.role}
                       </small>
                     </a>
                   ))

@@ -35,7 +35,7 @@ export default function EditInfo({
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [FormerName, setFormerName] = useState();
-  const token = process.env.REACT_APP_TOKENACCESS;
+  const localHost = process.env.REACT_APP_LOCALHOST;
   // Loaders
   const [Loading, setLoading] = useState(false);
   const [Success, setSuccess] = useState(false);
@@ -92,6 +92,7 @@ export default function EditInfo({
       let response = await fetch("https://restcountries.eu/rest/v2/all");
       if (response.ok) {
         let dataCount = await response.json();
+        console.log(dataCount);
         setCountries({ data: dataCount });
       } else {
         console.log("Error");
@@ -102,17 +103,15 @@ export default function EditInfo({
   };
   //   POSTING DATA
   //   URL
-  const url = "https://striveschool-api.herokuapp.com/api/profile/";
 
   const postData = async () => {
     setLoading(true);
     try {
-      let response = await fetch(url, {
+      let response = await fetch(`${localHost}/profile/2`, {
         method: "PUT",
         body: JSON.stringify(EditingInfo),
         headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          Authorization: "Bearer " + token,
+          "Content-type": "application/json",
         },
       });
       let data = await response.json();
@@ -318,7 +317,10 @@ export default function EditInfo({
                         // }
                         value={EditingInfo.area}
                         onChange={(e) =>
-                          setEditingInfo({ ...EditingInfo, area: e.target.value })
+                          setEditingInfo({
+                            ...EditingInfo,
+                            area: e.target.value,
+                          })
                         }
                       >
                         {/* {Countries.data &&
@@ -344,10 +346,7 @@ export default function EditInfo({
                   <Col xs="6">
                     <Form.Group controlId="formCountry">
                       <Form.Label>Locations within this area</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="...Country"
-                      />
+                      <Form.Control type="text" placeholder="...Country" />
                     </Form.Group>
                   </Col>
                   {/* INDUSTRY */}

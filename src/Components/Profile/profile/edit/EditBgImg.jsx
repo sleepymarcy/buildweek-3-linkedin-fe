@@ -12,7 +12,10 @@ function EditBgImg({
   title,
   postId,
   fetchPosts,
+  profileId,
 }) {
+  const localHost = process.env.REACT_APP_LOCALHOST;
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -33,13 +36,12 @@ function EditBgImg({
     setLoading(true);
     const url =
       title === "post-img"
-        ? "https://striveschool-api.herokuapp.com/api/posts/" + postId._id
-        : "https://striveschool-api.herokuapp.com/api/profile/6135e0aa7be6c10015f9db9c/picture";
-    const token = process.env.REACT_APP_TOKENACCESS;
+        ? `"https://striveschool-api.herokuapp.com/api/posts/"` + postId._id
+        : `${localHost}/profile/2/picture`;
 
     let formData = new FormData();
     let file = ImageUpld.file;
-    formData.append(title === "post-img" ? "post" : "profile", file);
+    formData.append(title === "post-img" ? "post" : "picture", file);
     console.log("formatDAta: ", formData);
     // ==
     try {
@@ -47,9 +49,6 @@ function EditBgImg({
         method: "POST",
         body: formData,
         // mode: "no-cors",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
       });
       let data = await response.json();
       if (response.ok) {
