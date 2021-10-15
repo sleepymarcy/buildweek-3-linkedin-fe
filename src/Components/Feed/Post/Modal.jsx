@@ -8,13 +8,14 @@ import { ImStatsBars } from "react-icons/im";
 import { GiFlowerStar } from "react-icons/gi";
 import { HiDocumentText } from "react-icons/hi";
 import EditBgImg from "../../Profile/profile/edit/EditBgImg";
+import axios from "axios";
 
 const ModalItem = ({
   onNewPost,
   postToUpdate,
   onUpdatePost,
   title,
-  fetchPosts,
+  fetchPosts
 }) => {
   const [show, setShow] = useState(false);
   const [text, setText] = useState(
@@ -22,63 +23,19 @@ const ModalItem = ({
   );
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const token = process.env.REACT_APP_TOKENACCESS;
-  const url = "https://striveschool-api.herokuapp.com/api/posts/";
 
-  const addPost = async () => {
-    const post = {
-      text,
-    };
+  const postPost = async (e) => {
+    e.preventDefault();
     try {
-      let response = await fetch(url, {
-        method: "POST",
-        body: JSON.stringify(post),
-        headers: {
-          "Content-type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      });
-      if (response.ok) {
-        const newPost = await response.json();
-
-        // if image upload image here
-        // the comment has been sent succesfully!!
-        console.log("Posts", newPost);
-        onNewPost(newPost);
-      } else {
-        console.log("error");
-        alert("something went wrong");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const updatePost = async () => {
-    const post = {
-      ...postToUpdate,
-      text,
-    };
-    console.log("look here: ", postToUpdate);
-    try {
-      const response = await fetch(url + postToUpdate._id, {
-        method: "PUT",
-        body: JSON.stringify(post),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token,
-        },
-      });
-      if (response.ok) {
-        const updatedPost = await response.json();
-        console.log("updated", updatedPost);
-        onUpdatePost(updatedPost);
-      } else {
-        console.log("Something went wrong");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+      const req = await axios.post(
+        "https://linkedin-builweed3.herokuapp.com" + "/posts",
+        {
+          text: text,
+          profileId: 1,
+          username: "Cleveland Rosenbaum"
+        }
+      );
+    } catch (error) {}
   };
 
   return (
@@ -103,7 +60,6 @@ const ModalItem = ({
               />
             </div>
             <div className="w-100">
-              <div>Azizbek Tokhirjonov</div>
               <Privacy />
             </div>
           </div>
@@ -142,7 +98,6 @@ const ModalItem = ({
               variant="primary"
               onClick={() => {
                 handleClose();
-                updatePost();
               }}
             >
               Edit
@@ -150,9 +105,9 @@ const ModalItem = ({
           ) : (
             <Button
               variant="primary"
-              onClick={() => {
+              onClick={(e) => {
                 handleClose();
-                addPost();
+                postPost(e);
               }}
             >
               Post

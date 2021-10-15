@@ -1,14 +1,14 @@
 import { Button, Card } from "react-bootstrap";
-import ModalItem from "./Feed/Post/Modal";
+import ModalItem from "./Post/Modal";
 import { BsCardImage } from "react-icons/bs";
 import { AiFillPlaySquare } from "react-icons/ai";
 import { SiGooglecalendar } from "react-icons/si";
 import { RiArticleFill } from "react-icons/ri";
-const PostFeed = ({ onNewPostFunction }) => {
+const Post = ({ onNewPostFunction }) => {
   return (
-    <Card id="post-card">
+    <Card className="w-100" id="post-card">
       <Card.Body>
-        <div className="d-flex wrapper">
+        <div className="d-flex wrapper w-100">
           <div className="profile-img">
             <img
               src="https://www.kindpng.com/picc/m/269-2697881_computer-icons-user-clip-art-transparent-png-icon.png"
@@ -59,4 +59,4 @@ const PostFeed = ({ onNewPostFunction }) => {
   );
 };
 
-export default PostFeed;
+export default Post;
