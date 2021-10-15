@@ -23,11 +23,18 @@ const ModalItem = ({
   );
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const token = process.env.REACT_APP_TOKENACCESS;
 
-  const postPost = async () => {
+  const postPost = async (e) => {
+    e.preventDefault();
     try {
-      const req = await axios.post();
+      const req = await axios.post(
+        "https://linkedin-builweed3.herokuapp.com" + "/posts",
+        {
+          text: text,
+          profileId: 1,
+          username: "Cleveland Rosenbaum"
+        }
+      );
     } catch (error) {}
   };
 
@@ -98,8 +105,9 @@ const ModalItem = ({
           ) : (
             <Button
               variant="primary"
-              onClick={() => {
+              onClick={(e) => {
                 handleClose();
+                postPost(e);
               }}
             >
               Post

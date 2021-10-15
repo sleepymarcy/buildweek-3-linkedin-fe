@@ -13,8 +13,8 @@ export default function PostsFeed() {
 
   const getPosts = async () => {
     try {
-      const req = await axios.get(API_URL + "/posts");
-      setPosts(req.data);
+      const req = await axios.get(API_URL + "/posts/?limit=5");
+      setPosts(req.data.reverse());
       setLoading(false);
     } catch (error) {
       console.error(error);
