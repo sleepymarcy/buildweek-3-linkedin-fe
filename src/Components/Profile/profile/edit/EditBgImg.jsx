@@ -12,6 +12,7 @@ function EditBgImg({
   title,
   postId,
   fetchPosts,
+  clickOff,
 }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -91,7 +92,7 @@ function EditBgImg({
           className="avatar"
           src={title === "post-img" ? postImg : imgSrc}
           alt=""
-          onClick={handleShow}
+          onClick={!clickOff && handleShow}
           style={{ cursor: "pointer" }}
         />
       )}

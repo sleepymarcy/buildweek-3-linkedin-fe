@@ -15,9 +15,7 @@ import {Modal, Button, Form} from 'react-bootstrap'
     return (
       <div className="about-container mt-3">
         <div  className="text-left ml-4 mr-4 mt-4 d-flex">
-          <p>
             <h5 style={{fontWeight:"480"}}>About</h5>
-          </p>
           <i className="bi bi-pencil ml-auto" style={{fontSize:"1.3rem"}} onClick={handleShow}></i>
           </div>
           <div className="text-left ml-4 mr-4 mb-4">

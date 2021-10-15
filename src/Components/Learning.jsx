@@ -1,9 +1,9 @@
 import { Card } from "react-bootstrap";
 const Learning = () => {
   const num = [1, 2, 3, 4];
-  const courses = () => {
+  const courses = (n) => {
     return (
-      <li className="d-flex mt-3">
+      <li className="d-flex mt-3" key={132 + n}>
         <div className="card-imgs">
           <Card.Img
             src="https://landofstudies.tech/wp-content/uploads/2019/11/social-media.jpg"
@@ -17,7 +17,7 @@ const Learning = () => {
       </li>
     );
   };
-  return <ul className="people">{num.map((n) => courses())}</ul>;
+  return <ul className="people">{num.map((n) => courses(n))}</ul>;
 };
 
 export default Learning;

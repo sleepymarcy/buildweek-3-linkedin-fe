@@ -17,7 +17,8 @@ import Experience from "./Experience";
 const MainContainer = ({ match }) => {
   const token = process.env.REACT_APP_TOKENACCESS;
 
-  const personId = "";
+  const profileId = match.params.id;
+  const myProfileId = 1;
   const [PersonInfo, setPersonInfo] = useState([]);
   //   !
   const [BtnsUpdate, setBtnsUpdate] = useState({
@@ -84,6 +85,25 @@ const MainContainer = ({ match }) => {
     } catch (erorr) {}
   };
   //   !
+  const sendConnect = async (myId, personId) => {
+    console.log(myId, personId);
+    try {
+      const url = `${process.env.REACT_APP_FETCHLINK}/profile/${myId}/sentFriendRequest`;
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify({ profileId: personId }), // CHANGE TO REQ VARIABLE
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   //   JSX
   return (
     <>
@@ -125,6 +145,7 @@ const MainContainer = ({ match }) => {
                   imgSrc={PersonInfo.data.image}
                   renewData={() => fetchPerson()}
                   valueAvatar={false}
+                  clickOff={match.params.id ? true : false}
                 />
               )}
             </Col>
@@ -182,19 +203,29 @@ const MainContainer = ({ match }) => {
                 <div className="mt-3 d-flex flex-wrap">
                   {/* opento */}
                   <div className="position-relative">
-                    <Button
-                      className="font-weight-bold position-relative"
-                      style={{ backgroundColor: "#0a66c2" }}
-                      onClick={() =>
-                        setBtnsUpdate({
-                          more: false,
-                          addSection: false,
-                          openTo: !BtnsUpdate.openTo,
-                        })
-                      }
-                    >
-                      {match.params.id ? "Connect" : "Open to"}
-                    </Button>
+                    {!match.params.id ? (
+                      <Button
+                        className="font-weight-bold position-relative"
+                        style={{ backgroundColor: "#0a66c2" }}
+                        onClick={() =>
+                          setBtnsUpdate({
+                            more: false,
+                            addSection: false,
+                            openTo: !BtnsUpdate.openTo,
+                          })
+                        }
+                      >
+                        Open to{" "}
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={(e) => sendConnect(myProfileId, profileId)}
+                        className="font-weight-bold position-relative"
+                        style={{ backgroundColor: "#0a66c2" }}
+                      >
+                        Connect
+                      </Button>
+                    )}
                     {BtnsUpdate.openTo && (
                       <OpenTo personAcc={match.params.id} />
                     )}
@@ -270,7 +301,11 @@ const MainContainer = ({ match }) => {
                 </div>
                 {PersonExpr.data ? (
                   PersonExpr.data.slice(0, 3).map((person) => (
-                    <a href="" className="d-flex align-items-center my-1">
+                    <a
+                      href=""
+                      className="d-flex align-items-center my-1"
+                      key={person.role + [person.image]}
+                    >
                       <img
                         src={person.image}
                         alt=""

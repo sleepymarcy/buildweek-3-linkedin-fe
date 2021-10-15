@@ -101,7 +101,7 @@ const [selectedEndDate, setSelectedEndDate] = useState("2021-09-09")
       
       <div className=" d-flex justify-content-center align-items-center edit-info-pencil">
         <div className="d-flex">
-      <i class="bi bi-plus-lg lighter-color ml-auto"
+      <i className="bi bi-plus-lg lighter-color ml-auto"
       style={{fontSize:"1.3rem"}} 
       onClick={handleShow}>       
       </i>
